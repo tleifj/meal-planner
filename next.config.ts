@@ -1,13 +1,17 @@
 import type { NextConfig } from "next"
 import withSerwistInit from "@serwist/next"
 
-const withSerwist = withSerwistInit({
-  swSrc: "src/sw.ts",
-  swDest: "public/sw.js",
-  disable: process.env.NODE_ENV === "development",
-  reloadOnOnline: true,
-})
-
 const nextConfig: NextConfig = {}
 
-export default withSerwist(nextConfig)
+// Serwist injects a webpack config, which clashes with Next 16's default
+// Turbopack dev server. Only apply the wrapper for production builds.
+const config =
+  process.env.NODE_ENV === "production"
+    ? withSerwistInit({
+        swSrc: "src/sw.ts",
+        swDest: "public/sw.js",
+        reloadOnOnline: true,
+      })(nextConfig)
+    : nextConfig
+
+export default config
