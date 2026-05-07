@@ -96,5 +96,11 @@ export function useRealtimeList(
     }
   }, [listId])
 
-  return items
+  // Optimistic mutator. Realtime echo from the server overwrites these
+  // shortly after, so transient drift is fine.
+  function mutate(updater: (curr: GroceryListItem[]) => GroceryListItem[]) {
+    setItems(updater)
+  }
+
+  return [items, mutate] as const
 }

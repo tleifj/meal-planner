@@ -47,8 +47,8 @@ export function AddItemSheet({
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase()
-    if (!q) return library.slice(0, 60)
-    return library.filter((i) => i.name.toLowerCase().includes(q)).slice(0, 60)
+    if (!q) return library
+    return library.filter((i) => i.name.toLowerCase().includes(q))
   }, [library, query])
 
   const exact = library.find((i) => i.name.toLowerCase() === query.trim().toLowerCase())
@@ -106,7 +106,6 @@ export function AddItemSheet({
           <div className="relative">
             <Search className="text-muted-foreground absolute left-3 top-1/2 size-4 -translate-y-1/2" />
             <Input
-              autoFocus
               placeholder="Search items…"
               value={query}
               onChange={(e) => setQuery(e.target.value)}

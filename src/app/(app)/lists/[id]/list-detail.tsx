@@ -33,9 +33,34 @@ export function ListDetail({
   categories: Category[]
   library: LibraryItem[]
 }) {
-  const items = useRealtimeList(listId, initialItems, categories)
+  const [items, mutate] = useRealtimeList(listId, initialItems, categories)
   const [, start] = useTransition()
   const [sheetOpen, setSheetOpen] = useState(false)
+
+  function onToggle(id: string, next: boolean) {
+    mutate((curr) =>
+      curr.map((i) =>
+        i.id === id
+          ? {
+              ...i,
+              checked: next,
+              checked_at: next ? new Date().toISOString() : null,
+            }
+          : i
+      )
+    )
+    start(() => toggleCheckedAction(id, next))
+  }
+
+  function onDelete(id: string) {
+    mutate((curr) => curr.filter((i) => i.id !== id))
+    start(() => deleteListItemAction(id))
+  }
+
+  function onQuantity(id: string, q: number) {
+    mutate((curr) => curr.map((i) => (i.id === id ? { ...i, quantity: q } : i)))
+    start(() => updateQuantityAction(id, q))
+  }
 
   const grouped = useMemo(() => {
     const map = new Map<number, { category: Category; rows: GroceryListItem[] }>()
@@ -67,9 +92,9 @@ export function ListDetail({
                     <ListItemRow
                       key={row.id}
                       item={row}
-                      onToggle={(next) => start(() => toggleCheckedAction(row.id, next))}
-                      onDelete={() => start(() => deleteListItemAction(row.id))}
-                      onQuantity={(q) => start(() => updateQuantityAction(row.id, q))}
+                      onToggle={(next) => onToggle(row.id, next)}
+                      onDelete={() => onDelete(row.id)}
+                      onQuantity={(q) => onQuantity(row.id, q)}
                     />
                   ))}
                 </ul>

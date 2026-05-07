@@ -94,7 +94,7 @@ export async function addToGroceryListAction(formData: FormData) {
   })
   if (error) return { error: error.message }
 
-  revalidatePath(`/lists/${parsed.data.listId}`)
+  // No revalidatePath — realtime carries the new row to all open clients.
   return { error: null }
 }
 
