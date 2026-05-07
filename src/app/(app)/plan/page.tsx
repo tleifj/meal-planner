@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation"
+import { CalendarDays } from "lucide-react"
 import { AppHeader } from "@/components/nav/app-header"
 import { createClient } from "@/lib/supabase/server"
 import {
@@ -31,7 +32,7 @@ export default async function PlanPage() {
 
   return (
     <>
-      <AppHeader title="Meal plan" />
+      <AppHeader title="Meal plan" icon={CalendarDays} />
       <WeekPlanner
         planId={plan.id}
         weekStart={weekStart}

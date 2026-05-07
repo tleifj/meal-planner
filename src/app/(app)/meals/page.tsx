@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { redirect } from "next/navigation"
-import { Plus } from "lucide-react"
+import { Plus, UtensilsCrossed } from "lucide-react"
 import { AppHeader } from "@/components/nav/app-header"
 import { createClient } from "@/lib/supabase/server"
 import {
@@ -38,6 +38,7 @@ export default async function MealsPage() {
     <>
       <AppHeader
         title="Meals"
+        icon={UtensilsCrossed}
         right={
           <Link
             href="/meals/new"

@@ -32,9 +32,9 @@ export function FavoriteButton({
         type="button"
         onClick={toggle}
         className={cn(
-          "flex h-9 items-center gap-1.5 rounded-full px-3 text-xs font-medium",
+          "flex h-9 items-center gap-1.5 rounded-full px-3 text-xs font-medium transition-colors",
           optimistic
-            ? "bg-amber-100 text-amber-900 dark:bg-amber-950 dark:text-amber-100"
+            ? "bg-accent text-accent-foreground"
             : "bg-muted text-muted-foreground"
         )}
       >
@@ -49,9 +49,14 @@ export function FavoriteButton({
       type="button"
       onClick={toggle}
       aria-label={optimistic ? "Unfavorite" : "Favorite"}
-      className="flex size-9 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm hover:bg-black/60"
+      className={cn(
+        "flex size-9 items-center justify-center rounded-full backdrop-blur-sm transition-colors",
+        optimistic
+          ? "bg-accent/90 text-accent-foreground hover:bg-accent"
+          : "bg-foreground/40 text-background hover:bg-foreground/60"
+      )}
     >
-      <Star className={cn("size-4", optimistic && "fill-amber-400 text-amber-400")} />
+      <Star className={cn("size-4", optimistic && "fill-current")} />
     </button>
   )
 }

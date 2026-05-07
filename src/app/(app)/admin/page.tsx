@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ChevronRight, BookOpen, Users } from "lucide-react"
+import { ChevronRight, BookOpen, Users, ShieldCheck } from "lucide-react"
 import { AppHeader } from "@/components/nav/app-header"
 import { createAdminClient } from "@/lib/supabase/admin"
 
@@ -26,7 +26,7 @@ export default async function AdminHome() {
 
   return (
     <>
-      <AppHeader title="Admin" />
+      <AppHeader title="Admin" icon={ShieldCheck} />
       <div className="flex-1 space-y-5 px-4 py-3">
         <section>
           <h2 className="text-muted-foreground mb-2 text-xs font-semibold uppercase tracking-wide">

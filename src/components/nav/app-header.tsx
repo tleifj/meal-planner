@@ -1,14 +1,16 @@
 import Link from "next/link"
-import { ChevronLeft } from "lucide-react"
+import { ChevronLeft, type LucideIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export function AppHeader({
   title,
+  icon: Icon,
   backHref,
   right,
   className,
 }: {
   title: string
+  icon?: LucideIcon
   backHref?: string
   right?: React.ReactNode
   className?: string
@@ -30,6 +32,8 @@ export function AppHeader({
           >
             <ChevronLeft className="size-5" />
           </Link>
+        ) : Icon ? (
+          <Icon className="text-primary size-5 shrink-0" aria-hidden />
         ) : null}
         <h1 className="truncate text-base font-semibold">{title}</h1>
         <div className="ml-auto flex items-center gap-1">{right}</div>

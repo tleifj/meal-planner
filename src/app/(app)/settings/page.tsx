@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation"
+import { Settings } from "lucide-react"
 import { AppHeader } from "@/components/nav/app-header"
 import { createClient } from "@/lib/supabase/server"
 import { Button } from "@/components/ui/button"
@@ -31,7 +32,7 @@ export default async function SettingsPage() {
 
   return (
     <>
-      <AppHeader title="Settings" />
+      <AppHeader title="Settings" icon={Settings} />
       <div className="flex-1 space-y-5 px-4 py-5">
         <section className="space-y-2 rounded-xl border p-4">
           <div className="text-muted-foreground text-xs font-semibold uppercase">Profile</div>

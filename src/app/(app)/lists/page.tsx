@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { redirect } from "next/navigation"
-import { Plus, ChevronRight } from "lucide-react"
+import { Plus, ChevronRight, ListChecks } from "lucide-react"
 import { AppHeader } from "@/components/nav/app-header"
 import { createClient } from "@/lib/supabase/server"
 import { fetchLists } from "@/lib/queries/lists"
@@ -23,6 +23,7 @@ export default async function ListsPage() {
     <>
       <AppHeader
         title="Grocery Lists"
+        icon={ListChecks}
         right={
           <Link
             href="/lists/new"
